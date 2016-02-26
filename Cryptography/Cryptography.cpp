@@ -16,7 +16,7 @@
 #include "Cryptography.h"
 #include <cryptlib.h>
 
-using namespace System::Collections::Generic;
+using namespace System::Collections;
 using namespace System::Runtime::InteropServices;
 using namespace OpenCKMS;
 
@@ -175,7 +175,9 @@ array<Byte>^ OpenCKMS::Cryptography::Encrypt(String ^ keyId, String^ recipient, 
 	IntPtr keyName = Marshal::StringToHGlobalAnsi(keyId);
 	IntPtr recipientName = Marshal::StringToHGlobalAnsi(recipient);
 
-	List<Byte>^ encryptedDataArray = gcnew List<Byte>();
+	//List<Byte>^ encryptedDataArray = gcnew List<Byte>();
+	Collections::ArrayList^ encryptedDataArray = gcnew Collections::ArrayList();
+	/*array<Byte>^ encryptedDataArray = gcnew array<Byte>(10);*/
 
 	status = cryptCreateEnvelope(&encryptionEnvelope, Unused, CRYPT_FORMAT_CRYPTLIB);
 	if (cryptStatusError(status))
@@ -236,10 +238,13 @@ array<Byte>^ OpenCKMS::Cryptography::Encrypt(String ^ keyId, String^ recipient, 
 			cryptDestroyEnvelope(encryptionEnvelope);
 			ThrowCryptographicException(encryptionEnvelope, status);
 		}
-		//encryptedDataArray->Add()
+		
 	} while (encryptedDataLength == maxEncryptionBufferSize);
-
+	array<Byte>^ tempArray = gcnew array<Byte>(encryptedDataLength);
+	encryptedDataArray->Add(tempArray);
 	cryptDestroyEnvelope(encryptionEnvelope);
+
+	return static_cast<array<Byte>^>(encryptedDataArray->ToArray(Byte::typeid));
 }
 
 array<Byte>^ OpenCKMS::Cryptography::Encrypt(String ^ keyId, String^ recipient, array<Byte>^ data)
@@ -269,7 +274,7 @@ array<System::Byte>^ OpenCKMS::Cryptography::Decrypt(CryptContext context, array
 /// <param name="value">The value.</param>
 void OpenCKMS::Cryptography::SetAttribute(CryptHandle handle, AttributeType attributeType, int value)
 {
-
+	throw gcnew NotImplementedException();
 }
 
 /// <summary>
@@ -293,7 +298,7 @@ void OpenCKMS::Cryptography::SetAttribute(CryptHandle handle, AttributeType attr
 /// <returns>int.</returns>
 int Cryptography::GetAttribute(CryptHandle handle, AttributeType attributeType)
 {
-	return 0;
+	throw gcnew NotImplementedException();
 }
 
 /// <summary>
@@ -304,7 +309,7 @@ int Cryptography::GetAttribute(CryptHandle handle, AttributeType attributeType)
 /// <returns>System.String ^.</returns>
 String^ OpenCKMS::Cryptography::GetAttributeString(CryptHandle handle, AttributeType attributeType)
 {
-	return String::Empty;
+	throw gcnew NotImplementedException();
 }
 
 /// <summary>
@@ -314,7 +319,7 @@ String^ OpenCKMS::Cryptography::GetAttributeString(CryptHandle handle, Attribute
 /// <param name="attributeType">Type of the attribute.</param>
 void OpenCKMS::Cryptography::DeleteAttribute(CryptHandle handle, AttributeType attributeType)
 {
-
+	throw gcnew NotImplementedException();
 }
 
 /****************************************************************************
@@ -363,7 +368,7 @@ array<Byte>^ OpenCKMS::Cryptography::ExportKey(CryptHandle exportKey, int maximu
 	Format keyFormat, CryptHandle exportKeyHandle,
 	CryptContext sessionKeyContext)
 {
-	return gcnew array<Byte>(0);
+	throw gcnew NotImplementedException();
 }
 
 /// <summary>
@@ -377,7 +382,7 @@ array<Byte>^ OpenCKMS::Cryptography::ExportKey(CryptHandle exportKey, int maximu
 CryptContext OpenCKMS::Cryptography::ImportKey(array<Byte>^ encryptedKey, int encryptedKeyLength, CryptContext importKeyContext,
 	SessionContext sessionKeyContext)
 {
-	return 0;
+	throw gcnew NotImplementedException();
 }
 
 /* Create and check a digital signature */
@@ -394,7 +399,7 @@ CryptContext OpenCKMS::Cryptography::ImportKey(array<Byte>^ encryptedKey, int en
 array<Byte>^ OpenCKMS::Cryptography::CreateSignature(int signatureMaxLength, Format formatType, CryptContext signatureContext,
 	CryptContext hashContext, CryptCertificate extraData)
 {
-	return gcnew array<Byte>(0);
+	throw gcnew NotImplementedException();
 }
 
 /// <summary>
@@ -408,7 +413,7 @@ array<Byte>^ OpenCKMS::Cryptography::CreateSignature(int signatureMaxLength, For
 CryptContext OpenCKMS::Cryptography::CheckSignature(array<Byte>^ signature, int signatureLength, CryptHandle signatureCheckKey,
 	CryptContext hashContext)
 {
-	return 0;
+	throw gcnew NotImplementedException();
 }
 
 /// <summary>
@@ -420,7 +425,8 @@ CryptContext OpenCKMS::Cryptography::CheckSignature(array<Byte>^ signature, int 
 /// <returns>CryptKeyset.</returns>
 CryptKeyset OpenCKMS::Cryptography::KeysetOpen(KeysetType^ keysetType, String ^ name, KeysetOption keysetOptions)
 {
-	return CryptKeyset();
+	throw gcnew NotImplementedException();
+	//return CryptKeyset();
 }
 
 /// <summary>
