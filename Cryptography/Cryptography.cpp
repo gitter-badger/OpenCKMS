@@ -161,6 +161,13 @@ void OpenCKMS::Cryptography::GenerateKey(CryptContext context, String^ label)
 	}
 }
 
+/// <summary>
+/// Encrypts the specified key identifier.
+/// </summary>
+/// <param name="keyId">The key identifier.</param>
+/// <param name="recipient">The recipient.</param>
+/// <param name="data">The data.</param>
+/// <returns>array&lt;Byte&gt;^.</returns>
 array<Byte>^ OpenCKMS::Cryptography::Encrypt(String ^ keyId, String^ recipient, String ^ data)
 {
 	int status;
@@ -247,6 +254,13 @@ array<Byte>^ OpenCKMS::Cryptography::Encrypt(String ^ keyId, String^ recipient, 
 	return static_cast<array<Byte>^>(encryptedDataArray->ToArray(Byte::typeid));
 }
 
+/// <summary>
+/// Encrypts the specified key identifier.
+/// </summary>
+/// <param name="keyId">The key identifier.</param>
+/// <param name="recipient">The recipient.</param>
+/// <param name="data">The data.</param>
+/// <returns>array&lt;Byte&gt;^.</returns>
 array<Byte>^ OpenCKMS::Cryptography::Encrypt(String ^ keyId, String^ recipient, array<Byte>^ data)
 {
 	throw gcnew System::NotImplementedException();

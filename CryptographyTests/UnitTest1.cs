@@ -10,14 +10,18 @@ namespace CryptographyTests
         [TestMethod]
         public void TestMethod1()
         {
-            var crypto = new Cryptography();
-            var ctx = crypto.CreateContext(Cryptography.Unused, Algorithm.Rsa);
-            crypto.GenerateKey(ctx, "MyNewKey");
+            //var crypto = new Cryptography();
+            //var ctx = crypto.CreateContext(Cryptography.Unused, Algorithm.Rsa);
+            //crypto.GenerateKey(ctx, "MyNewKey");
 
-            var exchangeCtx = crypto.CreateContext(Cryptography.Unused, Algorithm.TripleDes);
-            crypto.GenerateKey(exchangeCtx, "ExchangeKeyPassword");
-            var theKey = crypto.ExportKey(ctx, exchangeCtx);
-            crypto.DestroyContext(ctx);
+            //var exchangeCtx = crypto.CreateContext(Cryptography.Unused, Algorithm.TripleDes);
+            //crypto.GenerateKey(exchangeCtx, "ExchangeKeyPassword");
+            //var theKey = crypto.ExportKey(ctx, exchangeCtx);
+            //crypto.DestroyContext(ctx);
+
+            var c1 = new Class1();
+            c1.T();
+            
         }
     }
 }
